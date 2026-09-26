@@ -3,10 +3,7 @@ body.mod-linux:not(.is-mobile) {
   --violet-gap: 10px;
   --violet-topbar-height: 48px;
   --violet-controls-width: 94px;
-  --violet-tab-group-max: 640px;
   --violet-tab-controls-space: 104px;
-  --violet-tab-active-width: 240px;
-  --violet-tab-inactive-width: 160px;
   --violet-main-radius: 16px;
   --violet-control-radius: 8px;
   --violet-accent-soft: color-mix(in srgb, var(--interactive-accent) 13%, transparent);
@@ -181,29 +178,25 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-left-split .workspace-tab-he
   margin-left: calc(var(--violet-controls-width) - 28px);
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container {
+  box-sizing: border-box;
+  padding-inline: var(--violet-tab-controls-space);
   -webkit-app-region: no-drag;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner {
-  position: absolute;
-  top: 2px;
-  right: 0;
-  left: 0;
-  width: max-content;
-  max-width: min(var(--violet-tab-group-max), 100% - 2 * var(--violet-tab-controls-space));
-  height: 44px;
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  height: 38px;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 5px auto;
   padding: 3px 5px;
   justify-content: center;
-  gap: 2px;
+  gap: 0;
   border-radius: 999px;
   background-color: var(--violet-tab-track);
   box-shadow: var(--violet-tab-track-shadow);
   -webkit-app-region: no-drag;
-}
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner:not(:has(> .workspace-tab-header + .workspace-tab-header)) {
-  background-color: transparent;
-  box-shadow: none;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-new-tab,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-tab-list,
@@ -310,17 +303,12 @@ body.mod-linux:not(.is-mobile) .workspace-ribbon::before {
 }
 
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active {
-  flex: 0 1 var(--violet-tab-active-width);
-  width: var(--violet-tab-active-width);
   background-color: var(--violet-tab-active);
   border-radius: 999px;
   box-shadow: var(--violet-tab-shadow);
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header {
-  flex: 0 1 var(--violet-tab-inactive-width);
-  width: var(--violet-tab-inactive-width);
-  min-width: 0;
-  height: 38px;
+  height: 32px;
   border-radius: 999px;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header:not(.mod-active):hover {
@@ -328,6 +316,9 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner-title {
   text-align: center;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner-close-button {
+  display: flex;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::before,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::after {
