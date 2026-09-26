@@ -2,9 +2,10 @@ body.mod-linux:not(.is-mobile) {
   .prompt,
   .menu,
   .suggestion-container,
+  .popover,
   .modal {
     border: 1px solid var(--violet-line);
-    border-radius: var(--violet-side-radius);
+    border-radius: var(--violet-float-radius);
     box-shadow: var(--violet-float-shadow);
   }
 
