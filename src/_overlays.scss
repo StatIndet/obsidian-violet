@@ -1,3 +1,17 @@
+// Clavis expands its tooltip surface from the bottom center while fading in.
+// A clip-path reveals the same outline without scaling Obsidian's text.
+@keyframes violet-tooltip-reveal {
+  from {
+    clip-path: inset(100% 50% 0 50% round 8px);
+    opacity: 0;
+  }
+
+  to {
+    clip-path: inset(0 0 0 0 round 8px);
+    opacity: 1;
+  }
+}
+
 body.mod-linux:not(.is-mobile) {
   .prompt,
   .menu,
@@ -14,5 +28,20 @@ body.mod-linux:not(.is-mobile) {
   .suggestion-container {
     background-color: var(--violet-overlay);
     backdrop-filter: blur(18px) saturate(1.08);
+  }
+
+  .tooltip {
+    border-radius: 8px;
+    animation: violet-tooltip-reveal 200ms cubic-bezier(0.34, 0.8, 0.34, 1) both;
+  }
+
+  .tooltip .tooltip-arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.mod-linux:not(.is-mobile) .tooltip {
+    animation: none;
   }
 }
