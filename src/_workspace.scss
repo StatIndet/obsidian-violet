@@ -11,7 +11,7 @@ body.mod-linux:not(.is-mobile) {
 
   .workspace {
     gap: var(--violet-gap);
-    padding: var(--violet-topbar-height) var(--violet-gap) var(--violet-gap);
+    padding: 0 var(--violet-gap) var(--violet-gap);
   }
 
   .workspace-split.mod-root,
@@ -30,15 +30,15 @@ body.mod-linux:not(.is-mobile) {
     background-color: transparent;
   }
 
-  // Obsidian keeps each tab strip inside its pane. Lift the strips into the
-  // reserved top row so the note card starts below the compact tabs.
+  // Keep the native tab strips in flow. Electron's drag hit testing does not
+  // reliably follow a header lifted outside its pane with a negative top.
   .workspace-split.mod-root .workspace-tab-header-container,
   .workspace-split.mod-sidedock .workspace-tab-header-container {
-    position: absolute;
-    top: calc(-1 * var(--violet-topbar-height));
-    right: 0;
-    left: 0;
-    width: auto;
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    width: 100%;
     height: var(--violet-topbar-height);
     background-color: transparent;
     border: 0;
@@ -46,15 +46,16 @@ body.mod-linux:not(.is-mobile) {
   }
 
   .workspace-split.mod-left-split .workspace-tab-header-container {
-    left: calc(var(--violet-controls-width) - 28px);
+    width: calc(100% - var(--violet-controls-width) + 28px);
+    margin-left: calc(var(--violet-controls-width) - 28px);
   }
 
-  .workspace:not(.is-left-sidedock-open) .workspace-split.mod-root .workspace-tab-header-container {
-    left: calc(var(--violet-controls-width) - 30px);
+  .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container {
+    -webkit-app-region: no-drag;
   }
 
-  // Keep the lifted tabs outside Electron's drag region. Auto margins center
-  // the group without a transform that can offset native hit testing.
+  // Center tabs within their in-flow header; keep the interactive group out
+  // of Electron's window drag region.
   .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner {
     position: absolute;
     top: 2px;
@@ -99,8 +100,8 @@ body.mod-linux:not(.is-mobile) {
     right: 8px;
   }
 
-  .workspace-split.mod-root .workspace-tab-header-spacer {
-    pointer-events: none;
+  .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-spacer {
+    display: none;
   }
 
   .workspace-split.mod-root .workspace-tab-container {
@@ -115,6 +116,19 @@ body.mod-linux:not(.is-mobile) {
   // Split panes still share one writing card. Only tab groups touching the
   // window top join the compact top row; lower groups keep an in-card strip.
   .workspace-split.mod-root:has(> .workspace-split) {
+    isolation: isolate;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .workspace-split.mod-root:has(> .workspace-split)::before {
+    position: absolute;
+    z-index: -1;
+    inset: var(--violet-topbar-height) 0 0;
+    content: "";
+    pointer-events: none;
     background-color: var(--violet-main);
     border: 1px solid var(--violet-line);
     border-radius: var(--violet-main-radius);
@@ -185,6 +199,7 @@ body.mod-linux:not(.is-mobile) {
 
   .workspace-ribbon {
     margin-top: 0;
+    padding-top: calc(8px + var(--violet-topbar-height));
   }
 
   .workspace-ribbon::before {

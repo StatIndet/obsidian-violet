@@ -148,7 +148,7 @@ body.mod-linux:not(.is-mobile) .workspace {
 }
 body.mod-linux:not(.is-mobile) .workspace {
   gap: var(--violet-gap);
-  padding: var(--violet-topbar-height) var(--violet-gap) var(--violet-gap);
+  padding: 0 var(--violet-gap) var(--violet-gap);
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock {
@@ -166,21 +166,22 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tabs {
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-container,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tab-header-container {
-  position: absolute;
-  top: calc(-1 * var(--violet-topbar-height));
-  right: 0;
-  left: 0;
-  width: auto;
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  width: 100%;
   height: var(--violet-topbar-height);
   background-color: transparent;
   border: 0;
   box-shadow: none;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-left-split .workspace-tab-header-container {
-  left: calc(var(--violet-controls-width) - 28px);
+  width: calc(100% - var(--violet-controls-width) + 28px);
+  margin-left: calc(var(--violet-controls-width) - 28px);
 }
-body.mod-linux:not(.is-mobile) .workspace:not(.is-left-sidedock-open) .workspace-split.mod-root .workspace-tab-header-container {
-  left: calc(var(--violet-controls-width) - 30px);
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container {
+  -webkit-app-region: no-drag;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner {
   position: absolute;
@@ -220,8 +221,8 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-t
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .sidebar-toggle-button.mod-right {
   right: 8px;
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-spacer {
-  pointer-events: none;
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-spacer {
+  display: none;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-container {
   min-height: 0;
@@ -232,6 +233,18 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-containe
   box-shadow: var(--violet-main-shadow);
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split) {
+  isolation: isolate;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split)::before {
+  position: absolute;
+  z-index: -1;
+  inset: var(--violet-topbar-height) 0 0;
+  content: "";
+  pointer-events: none;
   background-color: var(--violet-main);
   border: 1px solid var(--violet-line);
   border-radius: var(--violet-main-radius);
@@ -290,6 +303,7 @@ body.mod-linux:not(.is-mobile) .workspace-ribbon .sidebar-toggle-button.mod-left
 }
 body.mod-linux:not(.is-mobile) .workspace-ribbon {
   margin-top: 0;
+  padding-top: calc(8px + var(--violet-topbar-height));
 }
 body.mod-linux:not(.is-mobile) .workspace-ribbon::before {
   background-color: transparent;
