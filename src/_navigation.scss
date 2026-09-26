@@ -22,6 +22,10 @@ body.mod-linux:not(.is-mobile) {
     display: flex;
   }
 
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner::after {
+    display: none;
+  }
+
   .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::before,
   .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::after {
     display: none;

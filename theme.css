@@ -320,6 +320,9 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner-close-button {
   display: flex;
 }
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner::after {
+  display: none;
+}
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::before,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::after {
   display: none;
