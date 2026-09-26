@@ -53,17 +53,27 @@ body.mod-linux:not(.is-mobile) {
     left: calc(var(--violet-controls-width) - 30px);
   }
 
-  .workspace-split.mod-root .workspace-tab-header-container-inner {
+  .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner {
     position: absolute;
-    top: 0;
+    top: 2px;
     left: 50%;
-    width: min(var(--violet-tab-group-max), calc(100% - 2 * var(--violet-tab-controls-space)));
-    height: var(--violet-topbar-height);
+    width: max-content;
+    max-width: min(var(--violet-tab-group-max), calc(100% - 2 * var(--violet-tab-controls-space)));
+    height: 44px;
     box-sizing: border-box;
     margin: 0;
-    padding: 5px 8px;
+    padding: 3px 5px;
     transform: translateX(-50%);
     justify-content: center;
+    gap: 2px;
+    border-radius: 999px;
+    background-color: var(--violet-tab-track);
+    box-shadow: var(--violet-tab-track-shadow);
+  }
+
+  .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner:not(:has(> .workspace-tab-header + .workspace-tab-header)) {
+    background-color: transparent;
+    box-shadow: none;
   }
 
   .workspace-split.mod-root .workspace-tab-header-new-tab,

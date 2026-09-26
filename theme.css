@@ -5,6 +5,8 @@ body.mod-linux:not(.is-mobile) {
   --violet-controls-width: 94px;
   --violet-tab-group-max: 640px;
   --violet-tab-controls-space: 104px;
+  --violet-tab-active-width: 240px;
+  --violet-tab-inactive-width: 160px;
   --violet-main-radius: 16px;
   --violet-control-radius: 8px;
   --violet-accent-soft: color-mix(in srgb, var(--interactive-accent) 13%, transparent);
@@ -19,6 +21,8 @@ body.theme-dark.mod-linux:not(.is-mobile) {
   --violet-main-shadow: 0 12px 32px #00000030, 0 2px 8px #0000001c;
   --violet-tab-active: rgb(224 216 244 / 0.16);
   --violet-tab-hover: rgb(224 216 244 / 0.09);
+  --violet-tab-track: rgb(235 228 248 / 0.10);
+  --violet-tab-track-shadow: inset 0 1px 1px #ffffff0d, 0 1px 4px #00000014;
   --violet-tab-shadow: 0 3px 10px #0000002e, 0 1px 2px #00000024;
   --violet-float-shadow: 0 18px 48px #00000059, 0 3px 12px #00000033;
 }
@@ -31,6 +35,8 @@ body.theme-light.mod-linux:not(.is-mobile) {
   --violet-main-shadow: 0 12px 32px #24203917, 0 2px 8px #2420390d;
   --violet-tab-active: rgb(255 255 255 / 0.88);
   --violet-tab-hover: rgb(255 255 255 / 0.42);
+  --violet-tab-track: rgb(84 80 97 / 0.12);
+  --violet-tab-track-shadow: inset 0 1px 1px #ffffffa3, 0 1px 4px #322f4214;
   --violet-tab-shadow: 0 4px 14px #3a33401f, 0 1px 3px #3a334014;
   --violet-float-shadow: 0 18px 48px #2420392e, 0 3px 12px #2420391c;
 }
@@ -176,17 +182,26 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-left-split .workspace-tab-he
 body.mod-linux:not(.is-mobile) .workspace:not(.is-left-sidedock-open) .workspace-split.mod-root .workspace-tab-header-container {
   left: calc(var(--violet-controls-width) - 30px);
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-container-inner {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 50%;
-  width: min(var(--violet-tab-group-max), 100% - 2 * var(--violet-tab-controls-space));
-  height: var(--violet-topbar-height);
+  width: max-content;
+  max-width: min(var(--violet-tab-group-max), 100% - 2 * var(--violet-tab-controls-space));
+  height: 44px;
   box-sizing: border-box;
   margin: 0;
-  padding: 5px 8px;
+  padding: 3px 5px;
   transform: translateX(-50%);
   justify-content: center;
+  gap: 2px;
+  border-radius: 999px;
+  background-color: var(--violet-tab-track);
+  box-shadow: var(--violet-tab-track-shadow);
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner:not(:has(> .workspace-tab-header + .workspace-tab-header)) {
+  background-color: transparent;
+  box-shadow: none;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-new-tab,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-tab-list,
@@ -279,23 +294,28 @@ body.mod-linux:not(.is-mobile) .workspace-ribbon::before {
   background-color: transparent;
 }
 
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active {
+  flex: 0 1 var(--violet-tab-active-width);
+  width: var(--violet-tab-active-width);
   background-color: var(--violet-tab-active);
   border-radius: 999px;
   box-shadow: var(--violet-tab-shadow);
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header {
+  flex: 0 1 var(--violet-tab-inactive-width);
+  width: var(--violet-tab-inactive-width);
+  min-width: 0;
   height: 38px;
   border-radius: 999px;
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header:not(.mod-active):hover {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header:not(.mod-active):hover {
   background-color: var(--violet-tab-hover);
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-inner-title {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner-title {
   text-align: center;
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active::before,
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active::after {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::before,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::after {
   display: none;
 }
 body.mod-linux:not(.is-mobile) .nav-file-title.is-active {

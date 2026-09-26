@@ -1,25 +1,30 @@
 body.mod-linux:not(.is-mobile) {
-  .workspace-split.mod-root .workspace-tab-header.mod-active {
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active {
+    flex: 0 1 var(--violet-tab-active-width);
+    width: var(--violet-tab-active-width);
     background-color: var(--violet-tab-active);
     border-radius: 999px;
     box-shadow: var(--violet-tab-shadow);
   }
 
-  .workspace-split.mod-root .workspace-tab-header {
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header {
+    flex: 0 1 var(--violet-tab-inactive-width);
+    width: var(--violet-tab-inactive-width);
+    min-width: 0;
     height: 38px;
     border-radius: 999px;
   }
 
-  .workspace-split.mod-root .workspace-tab-header:not(.mod-active):hover {
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header:not(.mod-active):hover {
     background-color: var(--violet-tab-hover);
   }
 
-  .workspace-split.mod-root .workspace-tab-header-inner-title {
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner-title {
     text-align: center;
   }
 
-  .workspace-split.mod-root .workspace-tab-header.mod-active::before,
-  .workspace-split.mod-root .workspace-tab-header.mod-active::after {
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::before,
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::after {
     display: none;
   }
 
