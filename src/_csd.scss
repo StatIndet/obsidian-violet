@@ -90,4 +90,34 @@ body.mod-linux:not(.is-mobile) {
     outline-offset: -3px;
     border-radius: var(--violet-control-radius);
   }
+
+  // Settings lives in a separate popout with a 30px titlebar, unlike the
+  // 48px main workspace header. Keep its controls inside that short strip.
+  &.is-popout-modal {
+    .titlebar {
+      height: 30px;
+    }
+
+    .titlebar-inner {
+      height: 30px;
+    }
+
+    .titlebar-text {
+      display: none;
+    }
+
+    .titlebar-button-container.mod-right {
+      top: 0;
+      height: 30px;
+    }
+
+    .titlebar-button-container.mod-right .titlebar-button {
+      height: 30px;
+    }
+  }
+
+  // Obsidian's frameless popout selector otherwise restores 2px of top padding.
+  &.is-popout-modal.is-frameless.is-hidden-frameless:not(.is-fullscreen) .titlebar {
+    padding: 0;
+  }
 }

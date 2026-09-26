@@ -149,6 +149,25 @@ body.mod-linux:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-bu
   outline-offset: -3px;
   border-radius: var(--violet-control-radius);
 }
+body.mod-linux:not(.is-mobile).is-popout-modal .titlebar {
+  height: 30px;
+}
+body.mod-linux:not(.is-mobile).is-popout-modal .titlebar-inner {
+  height: 30px;
+}
+body.mod-linux:not(.is-mobile).is-popout-modal .titlebar-text {
+  display: none;
+}
+body.mod-linux:not(.is-mobile).is-popout-modal .titlebar-button-container.mod-right {
+  top: 0;
+  height: 30px;
+}
+body.mod-linux:not(.is-mobile).is-popout-modal .titlebar-button-container.mod-right .titlebar-button {
+  height: 30px;
+}
+body.mod-linux:not(.is-mobile).is-popout-modal.is-frameless.is-hidden-frameless:not(.is-fullscreen) .titlebar {
+  padding: 0;
+}
 
 body.mod-linux:not(.is-mobile) .app-container {
   background-color: var(--violet-shell);
