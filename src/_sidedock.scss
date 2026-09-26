@@ -50,6 +50,12 @@ body.mod-linux:not(.is-mobile) {
       border-radius: 5px;
     }
 
+    // Date inputs end before their adjacent daily-note button, so the value
+    // container cannot round the input's exposed right edge.
+    .metadata-property-value[data-property-type="date"] > input.mod-date {
+      border-radius: 5px;
+    }
+
     .metadata-add-button {
       margin-top: 10px;
     }

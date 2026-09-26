@@ -369,6 +369,9 @@ body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-typ
 body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-property-value {
   border-radius: 5px;
 }
+body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-property-value[data-property-type=date] > input.mod-date {
+  border-radius: 5px;
+}
 body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-add-button {
   margin-top: 10px;
 }
