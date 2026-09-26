@@ -3,6 +3,8 @@ body.mod-linux:not(.is-mobile) {
   --violet-gap: 10px;
   --violet-topbar-height: 48px;
   --violet-controls-width: 94px;
+  --violet-tab-group-max: 640px;
+  --violet-tab-controls-space: 104px;
   --violet-main-radius: 16px;
   --violet-control-radius: 8px;
   --violet-accent-soft: color-mix(in srgb, var(--interactive-accent) 13%, transparent);
@@ -15,6 +17,9 @@ body.theme-dark.mod-linux:not(.is-mobile) {
   --violet-overlay: rgb(39 38 45 / 0.88);
   --violet-line: #ffffff17;
   --violet-main-shadow: 0 12px 32px #00000030, 0 2px 8px #0000001c;
+  --violet-tab-active: rgb(224 216 244 / 0.16);
+  --violet-tab-hover: rgb(224 216 244 / 0.09);
+  --violet-tab-shadow: 0 3px 10px #0000002e, 0 1px 2px #00000024;
   --violet-float-shadow: 0 18px 48px #00000059, 0 3px 12px #00000033;
 }
 
@@ -24,6 +29,9 @@ body.theme-light.mod-linux:not(.is-mobile) {
   --violet-overlay: rgb(250 249 252 / 0.88);
   --violet-line: #322f421c;
   --violet-main-shadow: 0 12px 32px #24203917, 0 2px 8px #2420390d;
+  --violet-tab-active: rgb(255 255 255 / 0.88);
+  --violet-tab-hover: rgb(255 255 255 / 0.42);
+  --violet-tab-shadow: 0 4px 14px #3a33401f, 0 1px 3px #3a334014;
   --violet-float-shadow: 0 18px 48px #2420392e, 0 3px 12px #2420391c;
 }
 
@@ -168,6 +176,37 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-left-split .workspace-tab-he
 body.mod-linux:not(.is-mobile) .workspace:not(.is-left-sidedock-open) .workspace-split.mod-root .workspace-tab-header-container {
   left: calc(var(--violet-controls-width) - 30px);
 }
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-container-inner {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(var(--violet-tab-group-max), 100% - 2 * var(--violet-tab-controls-space));
+  height: var(--violet-topbar-height);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 5px 8px;
+  transform: translateX(-50%);
+  justify-content: center;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-new-tab,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-tab-list,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .sidebar-toggle-button.mod-right {
+  position: absolute;
+  top: 0;
+  margin: 0;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-new-tab {
+  right: 74px;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-tab-list {
+  right: 42px;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .sidebar-toggle-button.mod-right {
+  right: 8px;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-spacer {
+  pointer-events: none;
+}
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-container {
   min-height: 0;
   overflow: hidden;
@@ -241,12 +280,23 @@ body.mod-linux:not(.is-mobile) .workspace-ribbon::before {
 }
 
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active {
-  background-color: var(--violet-accent-soft);
-  border-radius: 16px;
+  background-color: var(--violet-tab-active);
+  border-radius: 999px;
+  box-shadow: var(--violet-tab-shadow);
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header {
+  height: 38px;
+  border-radius: 999px;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header:not(.mod-active):hover {
+  background-color: var(--violet-tab-hover);
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-inner-title {
+  text-align: center;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active::before,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active::after {
-  box-shadow: none;
+  display: none;
 }
 body.mod-linux:not(.is-mobile) .nav-file-title.is-active {
   background-color: var(--violet-accent-soft);

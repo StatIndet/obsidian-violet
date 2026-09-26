@@ -53,6 +53,43 @@ body.mod-linux:not(.is-mobile) {
     left: calc(var(--violet-controls-width) - 30px);
   }
 
+  .workspace-split.mod-root .workspace-tab-header-container-inner {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(var(--violet-tab-group-max), calc(100% - 2 * var(--violet-tab-controls-space)));
+    height: var(--violet-topbar-height);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 5px 8px;
+    transform: translateX(-50%);
+    justify-content: center;
+  }
+
+  .workspace-split.mod-root .workspace-tab-header-new-tab,
+  .workspace-split.mod-root .workspace-tab-header-tab-list,
+  .workspace-split.mod-root .sidebar-toggle-button.mod-right {
+    position: absolute;
+    top: 0;
+    margin: 0;
+  }
+
+  .workspace-split.mod-root .workspace-tab-header-new-tab {
+    right: 74px;
+  }
+
+  .workspace-split.mod-root .workspace-tab-header-tab-list {
+    right: 42px;
+  }
+
+  .workspace-split.mod-root .sidebar-toggle-button.mod-right {
+    right: 8px;
+  }
+
+  .workspace-split.mod-root .workspace-tab-header-spacer {
+    pointer-events: none;
+  }
+
   .workspace-split.mod-root .workspace-tab-container {
     min-height: 0;
     overflow: hidden;
