@@ -53,22 +53,25 @@ body.mod-linux:not(.is-mobile) {
     left: calc(var(--violet-controls-width) - 30px);
   }
 
+  // Keep the lifted tabs outside Electron's drag region. Auto margins center
+  // the group without a transform that can offset native hit testing.
   .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner {
     position: absolute;
     top: 2px;
-    left: 50%;
+    right: 0;
+    left: 0;
     width: max-content;
     max-width: min(var(--violet-tab-group-max), calc(100% - 2 * var(--violet-tab-controls-space)));
     height: 44px;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0 auto;
     padding: 3px 5px;
-    transform: translateX(-50%);
     justify-content: center;
     gap: 2px;
     border-radius: 999px;
     background-color: var(--violet-tab-track);
     box-shadow: var(--violet-tab-track-shadow);
+    -webkit-app-region: no-drag;
   }
 
   .workspace-split.mod-root .workspace-tabs.mod-top > .workspace-tab-header-container > .workspace-tab-header-container-inner:not(:has(> .workspace-tab-header + .workspace-tab-header)) {
