@@ -44,6 +44,12 @@ body.mod-linux:not(.is-mobile) {
       border-bottom: 0;
     }
 
+    // Obsidian rounds the row, but the hovered key/value surfaces stay square.
+    .metadata-property-key-input,
+    .metadata-property-value {
+      border-radius: 5px;
+    }
+
     .metadata-add-button {
       margin-top: 10px;
     }
