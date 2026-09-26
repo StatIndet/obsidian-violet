@@ -1,7 +1,7 @@
 body.mod-linux:not(.is-mobile) {
   .workspace-split.mod-root .workspace-tab-header.mod-active {
     background-color: var(--violet-accent-soft);
-    border-radius: var(--violet-control-radius) var(--violet-control-radius) 0 0;
+    border-radius: 16px;
   }
 
   .workspace-split.mod-root .workspace-tab-header.mod-active::before,

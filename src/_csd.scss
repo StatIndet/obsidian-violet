@@ -1,18 +1,16 @@
 // Restyle Obsidian's existing controls; their native click handlers remain intact.
 body.mod-linux:not(.is-mobile) {
-  // Obsidian's frameless rule clears this surface with higher specificity.
-  &.is-hidden-frameless .titlebar {
-    background-color: var(--violet-shell);
-  }
-
   .titlebar {
-    height: 40px;
-    background-color: var(--violet-shell);
-    border-bottom: 1px solid var(--violet-line);
+    right: auto;
+    width: var(--violet-controls-width);
+    height: var(--violet-topbar-height);
+    background-color: transparent;
+    border: 0;
   }
 
   .titlebar-inner {
-    height: 40px;
+    width: var(--violet-controls-width);
+    height: var(--violet-topbar-height);
   }
 
   .titlebar-button-container.mod-left {
@@ -24,9 +22,14 @@ body.mod-linux:not(.is-mobile) {
     display: flex;
     align-items: center;
     gap: 1px;
-    height: 40px;
+    height: var(--violet-topbar-height);
     direction: ltr;
-    background-color: var(--violet-shell);
+    background-color: transparent;
+  }
+
+  // Obsidian adds a stronger focused frameless rule for this container.
+  &.is-hidden-frameless:not(.is-fullscreen) .titlebar-button-container.mod-right {
+    background-color: transparent;
   }
 
   .titlebar-button-container.mod-right .titlebar-button {
@@ -76,10 +79,6 @@ body.mod-linux:not(.is-mobile) {
 
   .titlebar-button-container.mod-right:hover .titlebar-button {
     background-image: var(--violet-button-hover);
-  }
-
-  &:not(.is-focused) .titlebar-button-container.mod-right .titlebar-button {
-    background-image: var(--violet-title-backdrop);
   }
 
   .titlebar-button-container.mod-right .titlebar-button:focus-visible {

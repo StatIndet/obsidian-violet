@@ -1,8 +1,9 @@
 body.mod-linux:not(.is-mobile) {
   background-color: var(--violet-shell);
   --violet-gap: 10px;
+  --violet-topbar-height: 48px;
+  --violet-controls-width: 94px;
   --violet-main-radius: 16px;
-  --violet-side-radius: 12px;
   --violet-control-radius: 8px;
   --violet-accent-soft: color-mix(in srgb, var(--interactive-accent) 13%, transparent);
   --violet-accent-line: color-mix(in srgb, var(--interactive-accent) 38%, transparent);
@@ -10,7 +11,6 @@ body.mod-linux:not(.is-mobile) {
 
 body.theme-dark.mod-linux:not(.is-mobile) {
   --violet-shell: #26252b;
-  --violet-side: rgb(51 49 58 / 0.76);
   --violet-main: #1c1c1c;
   --violet-overlay: rgb(39 38 45 / 0.88);
   --violet-line: #ffffff17;
@@ -20,7 +20,6 @@ body.theme-dark.mod-linux:not(.is-mobile) {
 
 body.theme-light.mod-linux:not(.is-mobile) {
   --violet-shell: #e9e8ee;
-  --violet-side: rgb(245 244 249 / 0.78);
   --violet-main: #ffffff;
   --violet-overlay: rgb(250 249 252 / 0.88);
   --violet-line: #322f421c;
@@ -52,16 +51,16 @@ body.theme-dark.mod-linux:not(.is-mobile) {
   --violet-title-backdrop: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAJxQTFRFAAAAAAAAYGBgXV1dX19fXFxcXFxcYGBgXl5eXFxcX19fXV1dX19fXl5eXFxcXV1dXl5eXV1dXl5eXV1dXFxcXl5eXFxcXl5eXV1dXFxcXl5eXV1dXFxcXV1dXV1dXV1dXV1dXFxcXV1dXl5eXV1dXV1dXV1dXV1dXV1dXl5eXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1doNfjyQAAADN0Uk5TAAEgISMkLzAxMjM0Ozw9P0FCUVJTVFZXfn+AgYKDvb6/xMbHydbX2Nna6ers8fLz9Pn60YknLAAAAMJJREFUGBmtwdt2wVAUBdC1hZbeqFsVjbidBCFi/f+/dWwxMiTOfjMnnkne5lF8Prto1oGHjBOW4pGgprlhxTpAxeeeNek37vQufJB3UQoO9EhbuJENvVaCwg8NQ1xJQoPD1TtNbag/mqZQEU0h1I6mGCqjKYM60XSESmhyUAuaQqgZTROoDk0vUBLTsEVhREMfBVnTaym4aRzokTZR6uZ8kH/hzseeNWkPFcGKFcsGamToWNoO4NOehi7LXPj7imf6BzpJeScIbYy9AAAAAElFTkSuQmCC");
 }
 
-body.mod-linux:not(.is-mobile).is-hidden-frameless .titlebar {
-  background-color: var(--violet-shell);
-}
 body.mod-linux:not(.is-mobile) .titlebar {
-  height: 40px;
-  background-color: var(--violet-shell);
-  border-bottom: 1px solid var(--violet-line);
+  right: auto;
+  width: var(--violet-controls-width);
+  height: var(--violet-topbar-height);
+  background-color: transparent;
+  border: 0;
 }
 body.mod-linux:not(.is-mobile) .titlebar-inner {
-  height: 40px;
+  width: var(--violet-controls-width);
+  height: var(--violet-topbar-height);
 }
 body.mod-linux:not(.is-mobile) .titlebar-button-container.mod-left {
   display: none;
@@ -71,9 +70,12 @@ body.mod-linux:not(.is-mobile) .titlebar-button-container.mod-right {
   display: flex;
   align-items: center;
   gap: 1px;
-  height: 40px;
+  height: var(--violet-topbar-height);
   direction: ltr;
-  background-color: var(--violet-shell);
+  background-color: transparent;
+}
+body.mod-linux:not(.is-mobile).is-hidden-frameless:not(.is-fullscreen) .titlebar-button-container.mod-right {
+  background-color: transparent;
 }
 body.mod-linux:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button {
   box-sizing: border-box;
@@ -117,68 +119,130 @@ body.mod-linux:not(.is-mobile) .titlebar-button.mod-maximize[aria-label^=Restore
 body.mod-linux:not(.is-mobile) .titlebar-button-container.mod-right:hover .titlebar-button {
   background-image: var(--violet-button-hover);
 }
-body.mod-linux:not(.is-mobile):not(.is-focused) .titlebar-button-container.mod-right .titlebar-button {
-  background-image: var(--violet-title-backdrop);
-}
 body.mod-linux:not(.is-mobile) .titlebar-button-container.mod-right .titlebar-button:focus-visible {
   outline: 2px solid var(--violet-accent-line);
   outline-offset: -3px;
   border-radius: var(--violet-control-radius);
 }
 
-body.mod-linux:not(.is-mobile) .app-container,
+body.mod-linux:not(.is-mobile) .app-container {
+  background-color: var(--violet-shell);
+}
 body.mod-linux:not(.is-mobile) .horizontal-main-container,
 body.mod-linux:not(.is-mobile) .workspace {
-  background-color: var(--violet-shell);
+  background-color: transparent;
 }
 body.mod-linux:not(.is-mobile) .workspace {
   gap: var(--violet-gap);
-  padding: 48px var(--violet-gap) var(--violet-gap);
+  padding: var(--violet-topbar-height) var(--violet-gap) var(--violet-gap);
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock {
   min-width: 0;
+  overflow: visible;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tabs {
+  overflow: visible;
+  background-color: transparent;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-container,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tab-header-container {
+  position: absolute;
+  top: calc(-1 * var(--violet-topbar-height));
+  right: 0;
+  left: 0;
+  width: auto;
+  height: var(--violet-topbar-height);
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-left-split .workspace-tab-header-container {
+  left: calc(var(--violet-controls-width) - 28px);
+}
+body.mod-linux:not(.is-mobile) .workspace:not(.is-left-sidedock-open) .workspace-split.mod-root .workspace-tab-header-container {
+  left: calc(var(--violet-controls-width) - 30px);
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-container {
+  min-height: 0;
+  overflow: hidden;
   background-color: var(--violet-main);
   border: 1px solid var(--violet-line);
   border-radius: var(--violet-main-radius);
   box-shadow: var(--violet-main-shadow);
-  overflow: hidden;
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-container,
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs,
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split) {
+  background-color: var(--violet-main);
+  border: 1px solid var(--violet-line);
+  border-radius: var(--violet-main-radius);
+  box-shadow: var(--violet-main-shadow);
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split) .workspace-split,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split) .workspace-tab-container,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split) .workspace-leaf,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split) .view-header,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root:has(> .workspace-split) .view-content {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs:not(.mod-top) > .workspace-tab-header-container {
+  position: relative;
+  top: auto;
+  left: 0;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .view-header {
   background-color: var(--violet-main);
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header-container {
-  border-bottom: 1px solid var(--violet-line);
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .view-header-title-container {
+  display: none;
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock:not(.is-sidedock-collapsed) {
-  background-color: var(--violet-side);
-  border: 1px solid var(--violet-line);
-  border-radius: var(--violet-side-radius);
-  overflow: hidden;
-}
-body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tab-header-container,
-body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tabs,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tab-container,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-leaf,
-body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .view-header {
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .view-header,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .view-content,
+body.mod-linux:not(.is-mobile) .workspace-ribbon,
+body.mod-linux:not(.is-mobile) .status-bar {
   background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+body.mod-linux:not(.is-mobile) .workspace-ribbon,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .view-header,
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tab-header-container,
+body.mod-linux:not(.is-mobile) .workspace-sidedock-vault-profile {
+  border-color: transparent;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-left-split .workspace-sidedock-vault-profile {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-leaf-resize-handle {
+  border: 0;
+  background-color: transparent;
+}
+body.mod-linux:not(.is-mobile) .workspace-ribbon .sidebar-toggle-button.mod-left {
+  left: var(--violet-controls-width);
+  top: 4px;
 }
 body.mod-linux:not(.is-mobile) .workspace-ribbon {
   margin-top: 0;
 }
-body.mod-linux:not(.is-mobile) .workspace-ribbon,
-body.mod-linux:not(.is-mobile) .status-bar {
-  background-color: var(--violet-shell);
-}
-body.mod-linux:not(.is-mobile) .workspace-ribbon,
-body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tab-header-container,
-body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .view-header {
-  border-color: var(--violet-line);
+body.mod-linux:not(.is-mobile) .workspace-ribbon::before {
+  background-color: transparent;
 }
 
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active {
   background-color: var(--violet-accent-soft);
-  border-radius: var(--violet-control-radius) var(--violet-control-radius) 0 0;
+  border-radius: 16px;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active::before,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tab-header.mod-active::after {

@@ -1,61 +1,143 @@
 body.mod-linux:not(.is-mobile) {
-  .app-container,
+  // One continuous shell material; only the note surface receives a card.
+  .app-container {
+    background-color: var(--violet-shell);
+  }
+
   .horizontal-main-container,
   .workspace {
-    background-color: var(--violet-shell);
+    background-color: transparent;
   }
 
   .workspace {
     gap: var(--violet-gap);
-    // A distinct title row keeps window controls clear of tabs and sidebars.
-    padding: 48px var(--violet-gap) var(--violet-gap);
+    padding: var(--violet-topbar-height) var(--violet-gap) var(--violet-gap);
   }
 
-  .workspace-split.mod-root {
+  .workspace-split.mod-root,
+  .workspace-split.mod-sidedock {
     min-width: 0;
+    overflow: visible;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .workspace-split.mod-root .workspace-tabs,
+  .workspace-split.mod-sidedock .workspace-tabs {
+    overflow: visible;
+    background-color: transparent;
+  }
+
+  // Obsidian keeps each tab strip inside its pane. Lift the strips into the
+  // reserved top row so the note card starts below the compact tabs.
+  .workspace-split.mod-root .workspace-tab-header-container,
+  .workspace-split.mod-sidedock .workspace-tab-header-container {
+    position: absolute;
+    top: calc(-1 * var(--violet-topbar-height));
+    right: 0;
+    left: 0;
+    width: auto;
+    height: var(--violet-topbar-height);
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .workspace-split.mod-left-split .workspace-tab-header-container {
+    left: calc(var(--violet-controls-width) - 28px);
+  }
+
+  .workspace:not(.is-left-sidedock-open) .workspace-split.mod-root .workspace-tab-header-container {
+    left: calc(var(--violet-controls-width) - 30px);
+  }
+
+  .workspace-split.mod-root .workspace-tab-container {
+    min-height: 0;
+    overflow: hidden;
     background-color: var(--violet-main);
     border: 1px solid var(--violet-line);
     border-radius: var(--violet-main-radius);
     box-shadow: var(--violet-main-shadow);
-    overflow: hidden;
   }
 
-  .workspace-split.mod-root .workspace-tab-header-container,
-  .workspace-split.mod-root .workspace-tabs,
-  .workspace-split.mod-root .workspace-leaf {
+  // Split panes still share one writing card. Only tab groups touching the
+  // window top join the compact top row; lower groups keep an in-card strip.
+  .workspace-split.mod-root:has(> .workspace-split) {
+    background-color: var(--violet-main);
+    border: 1px solid var(--violet-line);
+    border-radius: var(--violet-main-radius);
+    box-shadow: var(--violet-main-shadow);
+  }
+
+  .workspace-split.mod-root:has(> .workspace-split) .workspace-split,
+  .workspace-split.mod-root:has(> .workspace-split) .workspace-tab-container,
+  .workspace-split.mod-root:has(> .workspace-split) .workspace-leaf,
+  .workspace-split.mod-root:has(> .workspace-split) .view-header,
+  .workspace-split.mod-root:has(> .workspace-split) .view-content {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .workspace-split.mod-root .workspace-tabs:not(.mod-top) > .workspace-tab-header-container {
+    position: relative;
+    top: auto;
+    left: 0;
+  }
+
+  .workspace-split.mod-root .workspace-leaf,
+  .workspace-split.mod-root .view-header {
     background-color: var(--violet-main);
   }
 
-  .workspace-split.mod-root .workspace-tab-header-container {
-    border-bottom: 1px solid var(--violet-line);
+  // The active tab in the top row now owns the document title. Keep the
+  // in-card header's navigation and action buttons without repeating it.
+  .workspace-split.mod-root .view-header-title-container {
+    display: none;
   }
 
-  .workspace-split.mod-sidedock:not(.is-sidedock-collapsed) {
-    background-color: var(--violet-side);
-    border: 1px solid var(--violet-line);
-    border-radius: var(--violet-side-radius);
-    overflow: hidden;
-  }
-
-  .workspace-split.mod-sidedock .workspace-tab-header-container,
-  .workspace-split.mod-sidedock .workspace-tabs,
+  .workspace-split.mod-sidedock .workspace-tab-container,
   .workspace-split.mod-sidedock .workspace-leaf,
-  .workspace-split.mod-sidedock .view-header {
+  .workspace-split.mod-sidedock .view-header,
+  .workspace-split.mod-sidedock .view-content,
+  .workspace-ribbon,
+  .status-bar {
     background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .workspace-ribbon,
+  .workspace-split.mod-sidedock .view-header,
+  .workspace-split.mod-sidedock .workspace-tab-header-container,
+  .workspace-sidedock-vault-profile {
+    border-color: transparent;
+  }
+
+  .workspace-split.mod-left-split .workspace-sidedock-vault-profile {
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .workspace-split.mod-sidedock .workspace-leaf-resize-handle {
+    border: 0;
+    background-color: transparent;
+  }
+
+  .workspace-ribbon .sidebar-toggle-button.mod-left {
+    left: var(--violet-controls-width);
+    top: 4px;
   }
 
   .workspace-ribbon {
     margin-top: 0;
   }
 
-  .workspace-ribbon,
-  .status-bar {
-    background-color: var(--violet-shell);
-  }
-
-  .workspace-ribbon,
-  .workspace-split.mod-sidedock .workspace-tab-header-container,
-  .workspace-split.mod-sidedock .view-header {
-    border-color: var(--violet-line);
+  .workspace-ribbon::before {
+    background-color: transparent;
   }
 }

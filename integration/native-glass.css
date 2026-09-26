@@ -10,8 +10,11 @@ body.theme-light.mod-linux:not(.is-mobile) {
 }
 
 body.mod-linux:not(.is-mobile),
-body.mod-linux:not(.is-mobile) .app-container,
 body.mod-linux:not(.is-mobile) .horizontal-main-container,
 body.mod-linux:not(.is-mobile) .workspace {
   background-color: transparent;
+}
+
+body.mod-linux:not(.is-mobile) .app-container {
+  background-color: var(--violet-shell);
 }
