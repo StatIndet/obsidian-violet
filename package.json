@@ -1,0 +1,14 @@
+{
+  "name": "violet-obsidian-theme",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "sass --no-source-map src/theme.scss theme.css",
+    "watch": "sass --watch --no-source-map src/theme.scss theme.css",
+    "test:vault": "sh scripts/create-test-vault.sh",
+    "install:test": "sh scripts/install-test-theme.sh"
+  },
+  "devDependencies": {
+    "sass": "^1.93.2"
+  }
+}

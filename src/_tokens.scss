@@ -1,0 +1,31 @@
+// Shell-only tokens. Never override Obsidian's Markdown typography variables.
+body.mod-linux:not(.is-mobile) {
+  // Safe opaque base until the native Electron window exposes alpha.
+  background-color: var(--violet-shell);
+  --violet-gap: 10px;
+  --violet-main-radius: 16px;
+  --violet-side-radius: 12px;
+  --violet-control-radius: 8px;
+  --violet-accent-soft: color-mix(in srgb, var(--interactive-accent) 13%, transparent);
+  --violet-accent-line: color-mix(in srgb, var(--interactive-accent) 38%, transparent);
+}
+
+body.theme-dark.mod-linux:not(.is-mobile) {
+  --violet-shell: #26252b;
+  --violet-side: rgb(51 49 58 / 0.76);
+  --violet-main: #1c1c1c;
+  --violet-overlay: rgb(39 38 45 / 0.88);
+  --violet-line: #ffffff17;
+  --violet-main-shadow: 0 12px 32px #00000030, 0 2px 8px #0000001c;
+  --violet-float-shadow: 0 18px 48px #00000059, 0 3px 12px #00000033;
+}
+
+body.theme-light.mod-linux:not(.is-mobile) {
+  --violet-shell: #e9e8ee;
+  --violet-side: rgb(245 244 249 / 0.78);
+  --violet-main: #ffffff;
+  --violet-overlay: rgb(250 249 252 / 0.88);
+  --violet-line: #322f421c;
+  --violet-main-shadow: 0 12px 32px #24203917, 0 2px 8px #2420390d;
+  --violet-float-shadow: 0 18px 48px #2420392e, 0 3px 12px #2420391c;
+}

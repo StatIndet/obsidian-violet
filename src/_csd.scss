@@ -1,0 +1,90 @@
+// Restyle Obsidian's existing controls; their native click handlers remain intact.
+body.mod-linux:not(.is-mobile) {
+  // Obsidian's frameless rule clears this surface with higher specificity.
+  &.is-hidden-frameless .titlebar {
+    background-color: var(--violet-shell);
+  }
+
+  .titlebar {
+    height: 40px;
+    background-color: var(--violet-shell);
+    border-bottom: 1px solid var(--violet-line);
+  }
+
+  .titlebar-inner {
+    height: 40px;
+  }
+
+  .titlebar-button-container.mod-left {
+    display: none;
+  }
+
+  .titlebar-button-container.mod-right {
+    inset: 0 auto auto 14px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    height: 40px;
+    direction: ltr;
+    background-color: var(--violet-shell);
+  }
+
+  .titlebar-button-container.mod-right .titlebar-button {
+    box-sizing: border-box;
+    flex: 0 0 22px;
+    width: 22px;
+    min-width: 22px;
+    height: 32px;
+    padding: 0 3px;
+    border: 0;
+    background-color: transparent;
+    background-image: var(--violet-button-normal);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    box-shadow: none;
+  }
+
+  .titlebar-button-container.mod-right .titlebar-button svg {
+    opacity: 0;
+  }
+
+  .titlebar-button.mod-close {
+    order: 0;
+    --violet-button-normal: var(--violet-title-close-normal);
+    --violet-button-hover: var(--violet-title-close-hover);
+  }
+
+  .titlebar-button.mod-minimize {
+    order: 1;
+    --violet-button-normal: var(--violet-title-minimize-normal);
+    --violet-button-hover: var(--violet-title-minimize-hover);
+  }
+
+  .titlebar-button.mod-maximize,
+  .titlebar-button.mod-restore {
+    order: 2;
+    --violet-button-normal: var(--violet-title-maximize-normal);
+    --violet-button-hover: var(--violet-title-maximize-hover);
+  }
+
+  .titlebar-button.mod-restore,
+  .titlebar-button.mod-maximize[aria-label^="Restore"] {
+    --violet-button-normal: var(--violet-title-restore-normal);
+    --violet-button-hover: var(--violet-title-restore-hover);
+  }
+
+  .titlebar-button-container.mod-right:hover .titlebar-button {
+    background-image: var(--violet-button-hover);
+  }
+
+  &:not(.is-focused) .titlebar-button-container.mod-right .titlebar-button {
+    background-image: var(--violet-title-backdrop);
+  }
+
+  .titlebar-button-container.mod-right .titlebar-button:focus-visible {
+    outline: 2px solid var(--violet-accent-line);
+    outline-offset: -3px;
+    border-radius: var(--violet-control-radius);
+  }
+}

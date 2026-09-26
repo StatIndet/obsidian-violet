@@ -1,0 +1,39 @@
+body.mod-linux:not(.is-mobile) {
+  .workspace-split.mod-root .workspace-tab-header.mod-active {
+    background-color: var(--violet-accent-soft);
+    border-radius: var(--violet-control-radius) var(--violet-control-radius) 0 0;
+  }
+
+  .workspace-split.mod-root .workspace-tab-header.mod-active::before,
+  .workspace-split.mod-root .workspace-tab-header.mod-active::after {
+    box-shadow: none;
+  }
+
+  .nav-file-title.is-active {
+    background-color: var(--violet-accent-soft);
+    box-shadow: inset 2px 0 0 var(--violet-accent-line);
+    border-radius: var(--violet-control-radius);
+  }
+
+  .nav-file-title:not(.is-active):hover,
+  .nav-folder-title:hover,
+  .workspace-ribbon .clickable-icon:hover,
+  .view-header .clickable-icon:hover {
+    background-color: var(--violet-accent-soft);
+    border-radius: var(--violet-control-radius);
+  }
+
+  .workspace-ribbon .clickable-icon,
+  .view-header .clickable-icon {
+    transition: background-color 140ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.mod-linux:not(.is-mobile) {
+    .workspace-ribbon .clickable-icon,
+    .view-header .clickable-icon {
+      transition: none;
+    }
+  }
+}
