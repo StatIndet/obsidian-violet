@@ -18,6 +18,10 @@ body.mod-linux:not(.is-mobile) {
     text-align: center;
   }
 
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner {
+    background-color: transparent;
+  }
+
   .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-inner-close-button {
     display: flex;
   }
@@ -26,8 +30,8 @@ body.mod-linux:not(.is-mobile) {
     display: none;
   }
 
-  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::before,
-  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active::after {
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header::before,
+  .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header::after {
     display: none;
   }
 
