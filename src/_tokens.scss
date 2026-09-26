@@ -26,6 +26,10 @@ body.theme-dark.mod-linux:not(.is-mobile) {
   --violet-tab-track-shadow: inset 0 1px 1px #ffffff0d, 0 1px 4px #00000014;
   --violet-tab-shadow: 0 3px 10px #0000002e, 0 1px 2px #00000024;
   --violet-float-shadow: 0 18px 48px #00000059, 0 3px 12px #00000033;
+  --violet-tooltip-bg: rgb(56 53 65 / 0.96);
+  --violet-tooltip-fg: #f5f2fa;
+  --violet-tooltip-outline: #ffffff1c;
+  --violet-tooltip-shadow: 0 6px 18px #00000052, 0 1px 3px #00000038;
 }
 
 body.theme-light.mod-linux:not(.is-mobile) {
@@ -40,4 +44,8 @@ body.theme-light.mod-linux:not(.is-mobile) {
   --violet-tab-track-shadow: inset 0 1px 1px #ffffffa3, 0 1px 4px #322f4214;
   --violet-tab-shadow: 0 4px 14px #3a33401f, 0 1px 3px #3a334014;
   --violet-float-shadow: 0 18px 48px #2420392e, 0 3px 12px #2420391c;
+  --violet-tooltip-bg: rgb(253 252 255 / 0.96);
+  --violet-tooltip-fg: #2d2937;
+  --violet-tooltip-outline: #302b3e1f;
+  --violet-tooltip-shadow: 0 6px 18px #29233a24, 0 1px 3px #29233a14;
 }
