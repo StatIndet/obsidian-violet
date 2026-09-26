@@ -155,10 +155,23 @@ body.mod-linux:not(.is-mobile) {
     background-color: var(--violet-main);
   }
 
-  // The active tab in the top row now owns the document title. Keep the
-  // in-card header's navigation and action buttons without repeating it.
-  .workspace-split.mod-root .view-header-title-container {
-    display: none;
+  // The top tab names the document at rest. The in-card header keeps native
+  // navigation on the left, native actions on the right, and reveals the
+  // full document path only when the header is used.
+  .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title-container {
+    display: flex;
+    min-width: 0;
+  }
+
+  .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title-container > div {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease;
+  }
+
+  .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header:is(:hover, :focus-within) .view-header-title-container > div {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .workspace-split.mod-sidedock .workspace-tab-container,
@@ -202,5 +215,13 @@ body.mod-linux:not(.is-mobile) {
 
   .workspace-ribbon::before {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.mod-linux:not(.is-mobile) {
+    .workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-header-title-container > div {
+      transition: none;
+    }
   }
 }

@@ -37,7 +37,7 @@ body.mod-linux:not(.is-mobile) {
 
   .nav-file-title.is-active {
     background-color: var(--violet-accent-soft);
-    box-shadow: inset 2px 0 0 var(--violet-accent-line);
+    box-shadow: none;
     border-radius: var(--violet-control-radius);
   }
 

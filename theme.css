@@ -7,6 +7,7 @@ body.mod-linux:not(.is-mobile) {
   --violet-main-radius: 16px;
   --violet-control-radius: 8px;
   --violet-float-radius: 12px;
+  --violet-side-dot: color-mix(in srgb, var(--text-muted) 42%, transparent);
   --violet-accent-soft: color-mix(in srgb, var(--interactive-accent) 13%, transparent);
   --violet-accent-line: color-mix(in srgb, var(--interactive-accent) 38%, transparent);
 }
@@ -270,8 +271,18 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .view-header {
   background-color: var(--violet-main);
 }
-body.mod-linux:not(.is-mobile) .workspace-split.mod-root .view-header-title-container {
-  display: none;
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf-content[data-type=markdown] .view-header-title-container {
+  display: flex;
+  min-width: 0;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf-content[data-type=markdown] .view-header-title-container > div {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf-content[data-type=markdown] .view-header:is(:hover, :focus-within) .view-header-title-container > div {
+  opacity: 1;
+  pointer-events: auto;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-tab-container,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock .workspace-leaf,
@@ -310,6 +321,112 @@ body.mod-linux:not(.is-mobile) .workspace-ribbon::before {
   display: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf-content[data-type=markdown] .view-header-title-container > div {
+    transition: none;
+  }
+}
+@keyframes violet-side-leaf-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf:not([style*="display: none"]) .workspace-leaf-content {
+  animation: violet-side-leaf-in 180ms ease-out both;
+}
+body.mod-linux:not(.is-mobile) .mod-left-split .workspace-leaf-content[data-type=search] .search-results-info {
+  margin-bottom: 2px;
+  padding: 2px 16px 8px;
+  border-bottom: 0;
+}
+body.mod-linux:not(.is-mobile) .mod-left-split .workspace-leaf-content[data-type=search] .search-result-container {
+  padding-top: 8px;
+}
+body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-container {
+  --metadata-divider-width: 0px;
+}
+body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-properties {
+  gap: 6px;
+}
+body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-property-key,
+body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-property-value {
+  border-bottom: 0;
+}
+body.mod-linux:not(.is-mobile) .mod-right-split .workspace-leaf-content[data-type=file-properties] .metadata-add-button {
+  margin-top: 10px;
+}
+body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf-content:is([data-type=file-explorer],
+[data-type=tag],
+[data-type=all-properties],
+[data-type=outline]) > .nav-header > .nav-buttons-container {
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf-content:is([data-type=file-explorer],
+[data-type=tag],
+[data-type=all-properties],
+[data-type=outline]) > .nav-header > .nav-buttons-container > .nav-action-button {
+  box-sizing: border-box;
+  flex: 0 0 4px;
+  width: 4px;
+  min-width: 4px;
+  height: 4px;
+  min-height: 4px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: var(--violet-side-dot);
+  box-shadow: none;
+  pointer-events: none;
+  transition: flex-basis 160ms ease, width 160ms ease, min-width 160ms ease, height 160ms ease, min-height 160ms ease, background-color 160ms ease;
+}
+body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf-content:is([data-type=file-explorer],
+[data-type=tag],
+[data-type=all-properties],
+[data-type=outline]) > .nav-header > .nav-buttons-container > .nav-action-button > svg {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf-content:is([data-type=file-explorer],
+[data-type=tag],
+[data-type=all-properties],
+[data-type=outline]) > .nav-header:is(:hover, :focus-within, :has(.has-active-menu)) > .nav-buttons-container > .nav-action-button {
+  flex-basis: 30px;
+  width: 30px;
+  min-width: 30px;
+  height: 26px;
+  min-height: 26px;
+  padding: 3px;
+  overflow: visible;
+  border-radius: var(--violet-control-radius);
+  background-color: transparent;
+  pointer-events: auto;
+}
+body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf-content:is([data-type=file-explorer],
+[data-type=tag],
+[data-type=all-properties],
+[data-type=outline]) > .nav-header:is(:hover, :focus-within, :has(.has-active-menu)) > .nav-buttons-container > .nav-action-button > svg {
+  width: 18px;
+  height: 18px;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf:not([style*="display: none"]) .workspace-leaf-content {
+    animation: none;
+  }
+  body.mod-linux:not(.is-mobile) .mod-sidedock .workspace-leaf-content > .nav-header > .nav-buttons-container > .nav-action-button {
+    transition: none;
+  }
+}
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header.mod-active {
   background-color: var(--violet-tab-active);
   border-radius: 999px;
@@ -340,7 +457,7 @@ body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-tabs.mod-top
 }
 body.mod-linux:not(.is-mobile) .nav-file-title.is-active {
   background-color: var(--violet-accent-soft);
-  box-shadow: inset 2px 0 0 var(--violet-accent-line);
+  box-shadow: none;
   border-radius: var(--violet-control-radius);
 }
 body.mod-linux:not(.is-mobile) .nav-file-title:not(.is-active):hover,

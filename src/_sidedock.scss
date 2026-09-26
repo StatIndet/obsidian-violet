@@ -1,0 +1,126 @@
+@keyframes violet-side-leaf-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.mod-linux:not(.is-mobile) {
+  // Only the active leaf animates when Obsidian switches side panel views.
+  .mod-sidedock .workspace-leaf:not([style*="display: none"]) .workspace-leaf-content {
+    animation: violet-side-leaf-in 180ms ease-out both;
+  }
+
+  // Results and their controls remain separate through spacing, without a rule.
+  .mod-left-split .workspace-leaf-content[data-type="search"] {
+    .search-results-info {
+      margin-bottom: 2px;
+      padding: 2px 16px 8px;
+      border-bottom: 0;
+    }
+
+    .search-result-container {
+      padding-top: 8px;
+    }
+  }
+
+  // File properties use row gaps instead of Obsidian's key/value dividers.
+  .mod-right-split .workspace-leaf-content[data-type="file-properties"] {
+    .metadata-container {
+      --metadata-divider-width: 0px;
+    }
+
+    .metadata-properties {
+      gap: 6px;
+    }
+
+    .metadata-property-key,
+    .metadata-property-value {
+      border-bottom: 0;
+    }
+
+    .metadata-add-button {
+      margin-top: 10px;
+    }
+  }
+
+  // Keep a dot for each action. The header shrinks with the dots and grows
+  // back when the controls are revealed.
+  .mod-sidedock .workspace-leaf-content:is(
+    [data-type="file-explorer"],
+    [data-type="tag"],
+    [data-type="all-properties"],
+    [data-type="outline"]
+  ) > .nav-header > .nav-buttons-container {
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    > .nav-action-button {
+      box-sizing: border-box;
+      flex: 0 0 4px;
+      width: 4px;
+      min-width: 4px;
+      height: 4px;
+      min-height: 4px;
+      padding: 0;
+      overflow: hidden;
+      border-radius: 50%;
+      background-color: var(--violet-side-dot);
+      box-shadow: none;
+      pointer-events: none;
+      transition: flex-basis 160ms ease, width 160ms ease, min-width 160ms ease,
+        height 160ms ease, min-height 160ms ease, background-color 160ms ease;
+
+      > svg {
+        width: 0;
+        height: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  .mod-sidedock .workspace-leaf-content:is(
+    [data-type="file-explorer"],
+    [data-type="tag"],
+    [data-type="all-properties"],
+    [data-type="outline"]
+  ) > .nav-header:is(:hover, :focus-within, :has(.has-active-menu)) > .nav-buttons-container {
+    > .nav-action-button {
+      flex-basis: 30px;
+      width: 30px;
+      min-width: 30px;
+      height: 26px;
+      min-height: 26px;
+      padding: 3px;
+      overflow: visible;
+      border-radius: var(--violet-control-radius);
+      background-color: transparent;
+      pointer-events: auto;
+
+      > svg {
+        width: 18px;
+        height: 18px;
+        pointer-events: auto;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.mod-linux:not(.is-mobile) {
+    .mod-sidedock .workspace-leaf:not([style*="display: none"]) .workspace-leaf-content {
+      animation: none;
+    }
+
+    .mod-sidedock .workspace-leaf-content > .nav-header > .nav-buttons-container > .nav-action-button {
+      transition: none;
+    }
+  }
+}
