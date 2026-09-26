@@ -79,8 +79,11 @@ body.mod-linux:not(.is-mobile) {
   .workspace-split.mod-root .workspace-tab-header-tab-list,
   .workspace-split.mod-root .sidebar-toggle-button.mod-right {
     position: absolute;
+    z-index: 1;
     top: 0;
     margin: 0;
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
   }
 
   .workspace-split.mod-root .workspace-tab-header-new-tab {
@@ -198,6 +201,6 @@ body.mod-linux:not(.is-mobile) {
   }
 
   .workspace-ribbon::before {
-    background-color: transparent;
+    display: none;
   }
 }

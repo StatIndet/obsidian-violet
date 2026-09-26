@@ -6,6 +6,7 @@ body.mod-linux:not(.is-mobile) {
     height: var(--violet-topbar-height);
     background-color: transparent;
     border: 0;
+    pointer-events: none;
   }
 
   .titlebar-inner {
@@ -18,13 +19,14 @@ body.mod-linux:not(.is-mobile) {
   }
 
   .titlebar-button-container.mod-right {
-    inset: 0 auto auto 14px;
+    inset: 8px auto auto 14px;
     display: flex;
     align-items: center;
     gap: 1px;
-    height: var(--violet-topbar-height);
+    height: 32px;
     direction: ltr;
     background-color: transparent;
+    pointer-events: auto;
   }
 
   // Obsidian adds a stronger focused frameless rule for this container.
@@ -46,6 +48,8 @@ body.mod-linux:not(.is-mobile) {
     background-repeat: no-repeat;
     background-size: 16px 16px;
     box-shadow: none;
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
   }
 
   .titlebar-button-container.mod-right .titlebar-button svg {
@@ -77,7 +81,7 @@ body.mod-linux:not(.is-mobile) {
     --violet-button-hover: var(--violet-title-restore-hover);
   }
 
-  .titlebar-button-container.mod-right:hover .titlebar-button {
+  .titlebar-button-container.mod-right .titlebar-button:hover {
     background-image: var(--violet-button-hover);
   }
 
