@@ -16,6 +16,8 @@ def main() -> None:
 
     assert manifest["name"] == "Violet", "Unexpected theme name"
     assert manifest["version"] == package["version"], "Version mismatch"
+    assert package["license"] == "MIT", "Package license mismatch"
+    assert "Copyright (c) 2026 StatIndet" in Path("LICENSE").read_text(), "Missing Violet license"
     assert manifest["minAppVersion"], "Missing Obsidian minimum version"
     assert manifest["author"], "Missing theme author"
     if args.tag:

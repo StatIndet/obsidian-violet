@@ -24,3 +24,7 @@ npm run install:test
 `src/theme.scss` 是唯一 Sass 入口，生成根目录 `theme.css`。`manifest.json` 与生成的 CSS 一起提交；CI 会检查版本一致性及构建结果。`test-vault/` 仅供隔离验证，不进入仓库。`scripts/create-test-vault.sh` 使用 `tests/markdown-baseline.md` 创建不含个人笔记的基线 Vault。
 
 `src/` 保存主题源码，`integration/` 保存可选玻璃示例，`.github/workflows/` 保存 CI 与 Release 工作流。红绿灯按钮图像的来源与许可见 [第三方资源说明](THIRD_PARTY_NOTICES.md)。
+
+## 许可
+
+Violet 本身采用 [MIT 许可证](LICENSE)。嵌入的 MacTahoe GTK 按钮素材保留其原始 MIT 声明，详见[第三方资源说明](THIRD_PARTY_NOTICES.md)。

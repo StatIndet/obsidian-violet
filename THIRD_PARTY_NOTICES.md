@@ -1,5 +1,8 @@
 # Third-party assets
 
+Violet's own source is licensed under the root [MIT license](LICENSE). The
+following embedded assets retain their original MIT notice.
+
 The MacTahoe GTK theme's 2× PNG title-button assets are embedded as data URLs
 in `src/_titlebutton-assets.scss` and the generated `theme.css`.
 

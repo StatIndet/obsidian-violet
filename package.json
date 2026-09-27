@@ -1,7 +1,8 @@
 {
   "name": "violet-obsidian-theme",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "license": "MIT",
   "scripts": {
     "build": "sass --no-source-map src/theme.scss theme.css",
     "watch": "sass --watch --no-source-map src/theme.scss theme.css",

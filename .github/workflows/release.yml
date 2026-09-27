@@ -34,13 +34,13 @@ jobs:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           mkdir -p dist/Violet
-          cp manifest.json theme.css dist/
-          cp manifest.json theme.css dist/Violet/
+          cp manifest.json theme.css LICENSE dist/
+          cp manifest.json theme.css LICENSE dist/Violet/
           cp THIRD_PARTY_NOTICES.md dist/Violet/
           cp licenses/MACTAHOE.txt dist/Violet/MACTAHOE-LICENSE.txt
           cd dist
           zip -q -r "Violet-${RELEASE_TAG}.zip" Violet
-          sha256sum manifest.json theme.css "Violet-${RELEASE_TAG}.zip" > SHA256SUMS
+          sha256sum manifest.json theme.css LICENSE "Violet-${RELEASE_TAG}.zip" > SHA256SUMS
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -48,7 +48,7 @@ jobs:
         run: |
           notes=".github/release-notes/${RELEASE_TAG}.md"
           if [ -f "$notes" ]; then
-            gh release create "$RELEASE_TAG" dist/manifest.json dist/theme.css "dist/Violet-${RELEASE_TAG}.zip" dist/SHA256SUMS --verify-tag --title "Violet ${RELEASE_TAG}" --notes-file "$notes"
+            gh release create "$RELEASE_TAG" dist/manifest.json dist/theme.css dist/LICENSE "dist/Violet-${RELEASE_TAG}.zip" dist/SHA256SUMS --verify-tag --title "Violet ${RELEASE_TAG}" --notes-file "$notes"
           else
-            gh release create "$RELEASE_TAG" dist/manifest.json dist/theme.css "dist/Violet-${RELEASE_TAG}.zip" dist/SHA256SUMS --verify-tag --title "Violet ${RELEASE_TAG}" --generate-notes
+            gh release create "$RELEASE_TAG" dist/manifest.json dist/theme.css dist/LICENSE "dist/Violet-${RELEASE_TAG}.zip" dist/SHA256SUMS --verify-tag --title "Violet ${RELEASE_TAG}" --generate-notes
           fi
