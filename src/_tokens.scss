@@ -3,6 +3,7 @@ body.mod-linux:not(.is-mobile) {
   // Safe opaque base until the native Electron window exposes alpha.
   background-color: var(--violet-shell);
   --violet-gap: 10px;
+  --violet-status-clearance: 26px;
   --violet-topbar-height: 48px;
   --violet-controls-width: 94px;
   --violet-tab-controls-space: 104px;
@@ -12,6 +13,7 @@ body.mod-linux:not(.is-mobile) {
   --violet-side-dot: color-mix(in srgb, var(--text-muted) 42%, transparent);
   --violet-accent-soft: color-mix(in srgb, var(--interactive-accent) 13%, transparent);
   --violet-accent-line: color-mix(in srgb, var(--interactive-accent) 38%, transparent);
+  --violet-resize-line: color-mix(in srgb, var(--interactive-accent) 58%, transparent);
 }
 
 body.theme-dark.mod-linux:not(.is-mobile) {

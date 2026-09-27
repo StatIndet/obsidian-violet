@@ -1,19 +1,21 @@
 @keyframes violet-side-leaf-in {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(2px) scale(0.975);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
 body.mod-linux:not(.is-mobile) {
-  // Only the active leaf animates when Obsidian switches side panel views.
-  .mod-sidedock .workspace-leaf:not([style*="display: none"]) .workspace-leaf-content {
-    animation: violet-side-leaf-in 180ms ease-out both;
+  // Animate the whole incoming view, including its header. Backwards fill
+  // prevents a flash without leaving a transformed stacking context behind.
+  .mod-sidedock .workspace-leaf:not([style*="display: none"]) {
+    transform-origin: top center;
+    animation: violet-side-leaf-in 220ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
   }
 
   // Results and their controls remain separate through spacing, without a rule.
@@ -127,8 +129,12 @@ body.mod-linux:not(.is-mobile) {
 
 @media (prefers-reduced-motion: reduce) {
   body.mod-linux:not(.is-mobile) {
-    .mod-sidedock .workspace-leaf:not([style*="display: none"]) .workspace-leaf-content {
+    .mod-sidedock .workspace-leaf:not([style*="display: none"]) {
       animation: none;
+    }
+
+    .workspace-split.mod-sidedock > .workspace-leaf-resize-handle::after {
+      transition: none;
     }
 
     .mod-sidedock .workspace-leaf-content > .nav-header > .nav-buttons-container > .nav-action-button {

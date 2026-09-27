@@ -11,7 +11,8 @@ body.mod-linux:not(.is-mobile) {
 
   .workspace {
     gap: var(--violet-gap);
-    padding: 0 var(--violet-gap) var(--violet-gap);
+    // The fixed status bar needs its own rail below the writing card.
+    padding: 0 var(--violet-gap) calc(var(--violet-gap) + var(--violet-status-clearance));
   }
 
   .workspace-split.mod-root,
@@ -198,9 +199,40 @@ body.mod-linux:not(.is-mobile) {
     box-shadow: none;
   }
 
-  .workspace-split.mod-sidedock .workspace-leaf-resize-handle {
+  .workspace-split.mod-sidedock > .workspace-leaf-resize-handle {
+    width: calc(var(--violet-gap) + 3px);
+    overflow: visible;
     border: 0;
     background-color: transparent;
+  }
+
+  .workspace-split.mod-left-split > .workspace-leaf-resize-handle {
+    right: calc(-1 * var(--violet-gap));
+    left: auto;
+  }
+
+  .workspace-split.mod-right-split > .workspace-leaf-resize-handle {
+    right: auto;
+    left: calc(-1 * var(--violet-gap));
+  }
+
+  .workspace-split.mod-sidedock > .workspace-leaf-resize-handle::after {
+    position: absolute;
+    top: calc(var(--violet-topbar-height) + 8px);
+    bottom: 8px;
+    left: 50%;
+    width: 2px;
+    content: "";
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background-color: var(--violet-resize-line);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+  }
+
+  .workspace-split.mod-sidedock > .workspace-leaf-resize-handle:is(:hover, :active)::after {
+    opacity: 1;
   }
 
   .workspace-ribbon .sidebar-toggle-button.mod-left {
