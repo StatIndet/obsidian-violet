@@ -9,4 +9,5 @@
 - Keep the central editor and reading surface fully opaque. Treat CSS alpha, Electron window transparency, and niri blur as separate mechanisms.
 - Do not patch `app.asar` or install an Obsidian plugin automatically to make glass work. Document a proposed host adaptation, risk, and rollback for a user decision first.
 - Test in the isolated `test-vault`; capture real Obsidian DOM, computed styles, and screenshots in both edit and reading modes.
+- Keep machine-specific reports, deployment records, screenshots, and metrics local and ignored by Git.
 - Do not push to GitHub or publish a release unless explicitly requested.

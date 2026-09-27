@@ -46,7 +46,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          notes="docs/releases/${RELEASE_TAG}.md"
+          notes=".github/release-notes/${RELEASE_TAG}.md"
           if [ -f "$notes" ]; then
             gh release create "$RELEASE_TAG" dist/manifest.json dist/theme.css "dist/Violet-${RELEASE_TAG}.zip" dist/SHA256SUMS --verify-tag --title "Violet ${RELEASE_TAG}" --notes-file "$notes"
           else

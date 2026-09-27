@@ -1,3 +1,9 @@
 node_modules/
 test-vault/
 *.log
+docs/
+*.png
+*.jpg
+*.jpeg
+*.webp
+scripts/prepare-isolated-transparent-host.py
