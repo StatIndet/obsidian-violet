@@ -180,7 +180,24 @@ body.mod-linux:not(.is-mobile) .workspace {
 }
 body.mod-linux:not(.is-mobile) .workspace {
   gap: var(--violet-gap);
-  padding: 0 var(--violet-gap) calc(var(--violet-gap) + var(--violet-status-clearance));
+  padding: 0 var(--violet-gap) var(--violet-gap);
+}
+body.mod-linux:not(.is-mobile) .workspace-split.mod-root {
+  height: 100%;
+  transition: height 220ms cubic-bezier(0.2, 0.7, 0.2, 1) 90ms;
+}
+body.mod-linux:not(.is-mobile):has(.status-bar:is(:hover, :focus-within)) .workspace-split.mod-root {
+  height: calc(100% - var(--violet-status-clearance));
+  transition-delay: 0ms;
+}
+body.mod-linux:not(.is-mobile) .status-bar {
+  opacity: 0;
+  pointer-events: auto;
+  transition: opacity 90ms ease;
+}
+body.mod-linux:not(.is-mobile):has(.status-bar:is(:hover, :focus-within)) .status-bar {
+  opacity: 1;
+  transition-delay: 150ms;
 }
 body.mod-linux:not(.is-mobile) .workspace-split.mod-root,
 body.mod-linux:not(.is-mobile) .workspace-split.mod-sidedock {
@@ -378,6 +395,10 @@ body.mod-linux:not(.is-mobile) .workspace-ribbon::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body.mod-linux:not(.is-mobile) .workspace-split.mod-root,
+  body.mod-linux:not(.is-mobile) .status-bar {
+    transition: none;
+  }
   body.mod-linux:not(.is-mobile) .workspace-split.mod-root .workspace-leaf-content[data-type=markdown] .view-header-title-container > div {
     transition: none;
   }
