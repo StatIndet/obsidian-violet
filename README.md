@@ -2,6 +2,16 @@
 
 Violet 是面向 Linux 桌面 Obsidian 的静态主题。它以安静的顶部和侧栏围绕一张不透明的写作卡片，提供紧凑药丸标签页、圆角菜单和 macOS 风格的窗口按钮。Markdown 正文沿用 Obsidian 默认排版。
 
+## 效果预览
+
+浅色模式：
+
+![Violet 浅色模式下的 Obsidian 界面](assets/screenshots/violet-light.png)
+
+深色模式：
+
+![Violet 深色模式下的 Obsidian 界面](assets/screenshots/violet-dark.png)
+
 ## 安装与更新
 
 从 [最新 Release](https://github.com/StatIndet/obsidian-violet/releases/latest) 下载 `manifest.json` 和 `theme.css`，放到目标 Vault 的 `.obsidian/themes/Violet/`；或把 `Violet-v*.zip` 解压到该 Vault 的 `.obsidian/themes/`。在 **设置 → 外观 → 主题** 中选择 Violet。更新时备份并替换同一目录中的两个文件，然后重新打开 Vault。每个 Vault 单独选择主题。
