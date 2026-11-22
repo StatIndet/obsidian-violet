@@ -12,14 +12,16 @@ import tempfile
 PROJECT = Path(__file__).resolve().parents[1]
 ASAR = PROJECT / 'node_modules/.bin/asar'
 IDENT = r'[A-Za-z_$][\w$]*'
+CLEAR = '"#00000000"'
 # Identify the main-window options and their constructor, not every BrowserWindow.
 WINDOW = re.compile(
     rf'(?P<options>{IDENT})=\{{width:800,height:600,minWidth:200,minHeight:150,'
-    rf'backgroundColor:"#00000000",trafficLightPosition:\{{x:19,y:12\}},show:!1,'
+    rf'backgroundColor:(?P<background>(?:{IDENT}\|\|)?{CLEAR}),trafficLightPosition:'
+    rf'(?P<dynamic_buttons>{IDENT}\?\{{x:{IDENT}\.x,y:{IDENT}\.y\}}:)?\{{x:19,y:12\}},show:!1,'
     rf'frame:{IDENT},titleBarStyle:{IDENT},webPreferences:\{{contextIsolation:!1,'
     rf'nodeIntegration:!0,nodeIntegrationInWorker:!0,spellcheck:!0,webviewTag:!0,'
     rf'devTools:{IDENT}\.devTools\}},\.\.\.{IDENT}\({IDENT}\)'
-    rf'(?P<flag>,transparent:(?:!0|true))?(?P<end>\}}),{IDENT}=new {IDENT}\.BrowserWindow\((?P=options)\)'
+    rf'(?P<flag>,transparent:(?:!0|true))?(?P<end>\}}),(?P<window>{IDENT})=new {IDENT}\.BrowserWindow\((?P=options)\)'
 )
 
 
@@ -28,9 +30,26 @@ def patch_main(source):
     if len(matches) != 1:
         raise ValueError('Main-window patch location missing or ambiguous; update the adapter for this Obsidian version')
     match = matches[0]
-    if match['flag']:
-        return source
-    return source[:match.start('end')] + ',transparent:!0' + source[match.start('end'):]
+    if match['dynamic_buttons']:
+        # Since 1.15.1 the startup appearance callback can make the window
+        # opaque again. Keep the saved appearance, but make its native fill clear.
+        startup_fill = re.compile(
+            rf',(?P<state>{IDENT})\.background=(?P<color>{IDENT}),'
+            rf'{re.escape(match["window"])}\.setBackgroundColor\('
+            rf'(?P<fill>/\^#\[0-9a-f\]\{{6\}}\$/i\.test\((?P=color)\)\?(?P=color):{CLEAR}|{CLEAR})'
+            rf'\),{re.escape(match["window"])}\.closing&&{IDENT}\({IDENT},(?P=state)\)'
+            rf'\}};return {IDENT}\.ipcMain\.on\("startup-appearance",'
+        )
+        fills = list(startup_fill.finditer(source, match.end()))
+        if len(fills) != 1:
+            raise ValueError('Main-window startup fill missing or ambiguous; update the adapter for this Obsidian version')
+        start, end = fills[0].span('fill')
+        source = source[:start] + CLEAR + source[end:]
+    if not match['flag']:
+        end = match.start('end')
+        source = source[:end] + ',transparent:!0' + source[end:]
+    start, end = match.span('background')
+    return source[:start] + CLEAR + source[end:]
 
 
 def version_key(path):

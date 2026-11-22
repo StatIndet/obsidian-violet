@@ -78,6 +78,26 @@ class InstallTests(unittest.TestCase):
                     installer.patch_host(self.config)
                 self.assertEqual(target.read_bytes(), before)
 
+    def test_new_window_ignores_saved_native_fill_at_creation_and_startup(self):
+        new_main = MAIN.replace(
+            'backgroundColor:"#00000000",trafficLightPosition:{x:19,y:12}',
+            'backgroundColor:F||"#00000000",trafficLightPosition:w?{x:D.x,y:D.y}:{x:19,y:12}',
+        )
+        callback = (
+            'let notify=()=>{u.appearance=appearance,u.background=He,'
+            'f.setBackgroundColor(/^#[0-9a-f]{6}$/i.test(He)?He:"#00000000"),'
+            'f.closing&&save(o,u)};return e.ipcMain.on("startup-appearance",notify);'
+        )
+        other_fill = 'other.setBackgroundColor("#ffffff");'
+        source = new_main + callback + other_fill
+        expected = new_main.replace('F||', '').replace('...geometry(s)', '...geometry(s),transparent:!0')
+        expected += callback.replace('/^#[0-9a-f]{6}$/i.test(He)?He:"#00000000"', '"#00000000"')
+        expected += other_fill
+        target = self.archive(self.config / 'obsidian/obsidian-1.15.1.asar', '1.15.1', source)
+        self.assertEqual(installer.patch_host(self.config)[1], 'patched')
+        self.assertEqual(self.unpack(target), expected)
+        self.assertEqual(installer.patch_host(self.config)[1], 'already-transparent')
+
     def test_failed_install_returns_nonzero_without_enabling_glass(self):
         self.archive(self.config / 'obsidian/obsidian-1.15.0.asar', main='unknown window code')
         result = subprocess.run(
